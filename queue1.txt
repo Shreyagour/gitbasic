@@ -1,0 +1,168 @@
+#include<iostream>
+using namespace std;
+class queue
+{
+    private:
+    int front;
+    int rear;
+    int arr[5];
+    
+    public:
+    
+    queue()
+    {
+        front=-1;
+        rear=-1;
+        for(int i=0;i<5;i++)//assigning values intially in the array zero
+        {
+            arr[i]=0;
+        }
+    }
+    bool isEmpty()
+    {
+        if(front==-1 &&rear==-1)
+        return true;
+        else 
+        return false;
+    }
+    bool isFull()
+    {
+        if(rear== 4)
+        return true;
+        else 
+        return false;
+        
+    }
+    void Enqueue(int value)
+    {
+        if(isFull())
+        {
+            cout<<"queue is full";
+            return;
+        }
+        else if(isEmpty())
+        {
+            rear=0;
+            front= 0 ;
+            arr[rear]=value;
+        }
+        else
+        {
+            rear++;
+            arr[rear]=value;
+        }
+        
+    }
+    int Dequeue()
+    { int x;
+        if(isEmpty())
+        {
+            cout<<"queue is empty"<<endl;
+            return 0;
+        }
+        else if(front==rear)
+        {
+            x=arr[front];
+            arr[front]=0;
+            rear=-1;
+            front=-1;
+            return x;
+        }
+        else
+        {
+            x=arr[front];
+            arr[front]=0;
+            front++;
+            return x;
+        }
+    }
+    int count()
+    {
+        if(rear==-1 && front==-1)
+        {
+            return 0;
+        }
+        else
+        {
+            return rear-front+1;
+        }
+    }
+    void display()
+    {
+        cout<<"values in queue are"<<endl;
+        for(int i=0;i<5;i++)
+        {
+            cout<<arr[i]<<"  ";
+        }
+    }
+    
+};
+int main()
+{
+    queue q1;
+    int option,value;
+    
+    do
+    {
+        cout<<"enter your choice"<<endl;
+        cout<<"1. Enqueue()"<<endl;
+        cout<<"2. Dequeue()"<<endl;
+        cout<<"3. isEmpty()"<<endl;
+        cout<<"4. isFull()"<<endl;
+        cout<<"5. count()"<<endl;
+        cout<<"6. display()"<<endl;
+        cout<<"7. Clear screen"<<endl;
+        
+        cin>>option;
+        switch(option)
+        {
+            case 0:
+            break;
+            case 1:
+            cout<<"enter item to insert through enqueue"<<endl;
+            cin>>value;
+            q1.Enqueue(value);
+            break;
+            
+            case 2:
+            cout<<"item is deleted by dequeue"<<endl;
+            q1.Dequeue();
+            break;
+            
+            case 3:
+            if(q1.isEmpty())
+            cout<<"queue is empty"<<endl;
+            else
+            cout<<"not empty"<<endl;
+            break;
+            
+            case 4:
+            if(q1.isFull())
+            cout<<"queue is full"<<endl;
+            else
+            cout<<"not full"<<endl;
+            break;
+            
+            case 5:
+            cout<<"number of elements in queue are"<<q1.count()<<endl;
+            break;
+            
+            case 6:
+            cout<<"display called"<<endl;
+            q1.display();
+            break;
+            
+            case 7:
+            system("cls");
+            break;
+            
+            deafult:
+            cout<<"enter correct choice"<<endl;
+            break;
+        }
+    } while(option!=0);
+       return 0;
+       
+        
+    
+}
